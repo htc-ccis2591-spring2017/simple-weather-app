@@ -42,6 +42,3 @@ $(function () {
     }
 
 });
-
-
-// My Key 1facaaab905e18b5369e1dfd1605da85
