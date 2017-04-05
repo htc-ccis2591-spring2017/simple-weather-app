@@ -28,3 +28,7 @@ To work with the API, you must register and get an API key.  You can get a free 
 Make a call to get the weather by zip code:  http://openweathermap.org/current#zip
 
 Build HTML to display the weather description (for example, “Sky is clear.”) and the current temperature. Make sure to display the temperature in degrees Fahrenheit.  You can optionally set up Celcius if you like, but it should not be shown as the default. 
+
+
+
+Liquid Templating...

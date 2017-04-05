@@ -1,22 +1,45 @@
-console.log("hello js");
 $(function () {
     'use strict';
     console.log("Weather App");
 
-    $.ajaxSetup({
-        dataType: "jsonp"
-    });
-    $.ajax({
-        url: "http://samples.openweathermap.org/data/2.5/weather?zip=94040,us,units=Imperial&appid=b1b15e88fa797225412429c1c50c122a1",
-        dataType: "jsonp",
-        contentType: "applications/javascript",
-        success: function (data) {
-            console.log(data);
+    $("#submit").click(function () {
+        let zipcode = $("#zip").val();
+        let apiKey = $("#apikey").val();
+        getApiData(zipcode, apiKey);
+    })
 
-        }
+    function getApiData(zipcode, apiKey) {
+        console.log(zipcode);
 
-    });
+        $.ajax({
+            type: "get",
+            url: "http://api.openweathermap.org/data/2.5/weather?zip=" + zipcode + ",us&units=Imperial&appid=" + apiKey,
+            dataType: "jsonp",
+            contentType: "applications/javascript",
+            error: function (xhr, status, error) {
+                alert("Error: " + xhr.status + " - " + error);
+            },
+            success: function (data) {
+                // console.log(data);
+                displayWeather("#weather", data.weather, data.main);
+            },
+        });
+    }
 
+    function displayWeather(target, weatherArray, main) {
+        let html = "";
+        $.each(weatherArray, function (index) {
+            let weather = weatherArray[index];
+            html += getWeatherHtml(weather, main);
+        })
+        $(target).append(html);
+    }
+
+    function getWeatherHtml(weather, main) {
+        let html = "";
+        html += '<p>' + "Temp is " + main.temp + "ºF with " + weather.description + ".</p>";
+        return html;
+    }
 
 });
 
